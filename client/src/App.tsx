@@ -4,7 +4,10 @@ import LoginPage from '@pages/LoginPage'
 import RegisterPage from '@pages/RegisterPage'
 import DashboardPage from '@pages/DashboardPage'
 import InvitePage from '@pages/InvitePage'
-import WorkspaceDashboardPage from '@pages/WorkspaceDashboardPage'
+import WorkspaceLayout from '@components/workspace/WorkspaceLayout'
+import WorkspaceOverviewPage from '@pages/workspace/WorkspaceOverviewPage'
+import WorkspaceTeamPage from '@pages/workspace/WorkspaceTeamPage'
+import WorkspaceSettingsPage from '@pages/workspace/WorkspaceSettingsPage'
 import ToastViewport from '@components/ui/ToastViewport'
 import './styles/App.css'
 
@@ -65,8 +68,12 @@ function App() {
         />
         <Route
           path="/workspace/:workspaceId"
-          element={user ? <WorkspaceDashboardPage /> : <Navigate to="/login" replace />}
-        />
+          element={user ? <WorkspaceLayout /> : <Navigate to="/login" replace />}
+        >
+          <Route index element={<WorkspaceOverviewPage />} />
+          <Route path="team" element={<WorkspaceTeamPage />} />
+          <Route path="settings" element={<WorkspaceSettingsPage />} />
+        </Route>
         <Route path="/invite" element={<InvitePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

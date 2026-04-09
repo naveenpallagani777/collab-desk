@@ -31,6 +31,8 @@ const RegisterPage = () => {
 	}, [searchParams])
 	const isInviteLocked = Boolean(invitedEmail)
 	const redirectPath = searchParams.get('redirect') || '/dashboard'
+	const [firstName, setFirstName] = useState('')
+	const [lastName, setLastName] = useState('')
 	const [username, setUsername] = useState('')
 	const [email, setEmail] = useState(invitedEmail)
 	const [password, setPassword] = useState('')
@@ -41,7 +43,7 @@ const RegisterPage = () => {
 		event.preventDefault()
 		clearError()
 		try {
-			await register({ username, email, password })
+			await register({ firstName, lastName, username, email, password })
 			navigate(redirectPath)
 		} catch {
 			// Error state set in auth context
@@ -55,6 +57,38 @@ const RegisterPage = () => {
 			subtitle="Set up your identity and start collaborating"
 		>
 			<form className="flex flex-col gap-5" onSubmit={onSubmit}>
+				<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+					<Field id="firstName" label="First name">
+						<input
+							id="firstName"
+							name="firstName"
+							type="text"
+							placeholder="John"
+							className={inputCls}
+							value={firstName}
+							onChange={(e) => setFirstName(e.target.value)}
+							minLength={1}
+							required
+							autoComplete="given-name"
+						/>
+					</Field>
+
+					<Field id="lastName" label="Last name">
+						<input
+							id="lastName"
+							name="lastName"
+							type="text"
+							placeholder="Doe"
+							className={inputCls}
+							value={lastName}
+							onChange={(e) => setLastName(e.target.value)}
+							minLength={1}
+							required
+							autoComplete="family-name"
+						/>
+					</Field>
+				</div>
+
 				<Field id="username" label="Username">
 					<input
 						id="username"

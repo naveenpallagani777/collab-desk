@@ -152,7 +152,7 @@ const DashboardPage = () => {
                         timezone: toOptional(timezone),
                         coordinates:
                             coordinates &&
-                            (Number.isFinite(coordinates.lat) || Number.isFinite(coordinates.lng))
+                                (Number.isFinite(coordinates.lat) || Number.isFinite(coordinates.lng))
                                 ? {
                                     lat: Number.isFinite(coordinates.lat) ? coordinates.lat : undefined,
                                     lng: Number.isFinite(coordinates.lng) ? coordinates.lng : undefined,

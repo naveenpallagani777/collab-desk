@@ -9,8 +9,12 @@ export interface LoginPayload {
   password: string
 }
 
-export interface RegisterPayload extends LoginPayload {
-  username: string
+export interface RegisterPayload {
+    firstName: string
+    lastName: string
+    username: string
+    email: string
+    password: string
 }
 
 export interface ApiEnvelope<T> {
